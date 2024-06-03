@@ -7,32 +7,19 @@
     <description></description>
     <language>en</language>
     <copyright></copyright>
-    <lastBuildDate>Mon, 03 Jun 2024 00:57:20 -0600</lastBuildDate>
-    <pubDate>Mon, 03 Jun 2024 00:57:20 -0600</pubDate>
+    <lastBuildDate>Mon, 03 Jun 2024 01:09:02 -0600</lastBuildDate>
+    <pubDate>Mon, 03 Jun 2024 01:09:02 -0600</pubDate>
     <image>
         <title>Web Starter</title>
         <url>/images/icons/icon-152x152.png</url>
         <link></link>
     </image>
     <item>
-        <title>Getting started</title>
-        <link>/content/docs/getting-started/</link>
-        <guid isPermaLink="true">/content/docs/getting-started/</guid>
-        <description>Getting started with this template.</description>
-        <pubDate>Mon, 04 Apr 2022 19:00:00 -0500</pubDate>
-        <atom:link href="/content/docs/getting-started/" rel="self" />
-        <dc:creator>Gene</dc:creator><!-- TODO: resolve cover image url either local or on a different site -->
-        <media:content medium="image" width="300" height="125"
-                       url="/content/docs/getting-started/images/cover-preview.webp" />
-        <media:credit></media:credit>
-        <media:description></media:description>
-    </item>
-    <item>
         <title>Home</title>
         <link>/</link>
         <guid isPermaLink="true">/</guid>
         <description>About this web starter and how to get started with it.</description>
-        <pubDate>Mon, 03 Jun 2024 00:57:20 -0600</pubDate>
+        <pubDate>Mon, 03 Jun 2024 01:09:02 -0600</pubDate>
         <atom:link href="/" rel="self" />
         <dc:creator></dc:creator>
     </item>
@@ -41,7 +28,7 @@
         <link>/search/</link>
         <guid isPermaLink="true">/search/</guid>
         <description>Search this website</description>
-        <pubDate>Mon, 03 Jun 2024 00:57:20 -0600</pubDate>
+        <pubDate>Mon, 03 Jun 2024 01:09:02 -0600</pubDate>
         <atom:link href="/search/" rel="self" />
         <dc:creator></dc:creator>
     </item>
@@ -59,11 +46,24 @@
         <media:description></media:description>
     </item>
     <item>
+        <title>Getting started</title>
+        <link>/content/docs/getting-started/</link>
+        <guid isPermaLink="true">/content/docs/getting-started/</guid>
+        <description>Getting started with this template.</description>
+        <pubDate>Mon, 04 Apr 2022 19:00:00 -0500</pubDate>
+        <atom:link href="/content/docs/getting-started/" rel="self" />
+        <dc:creator>Gene</dc:creator><!-- TODO: resolve cover image url either local or on a different site -->
+        <media:content medium="image" width="300" height="125"
+                       url="/content/docs/getting-started/images/cover-preview.webp" />
+        <media:credit></media:credit>
+        <media:description></media:description>
+    </item>
+    <item>
         <title>Documentation</title>
         <link>/content/docs/</link>
         <guid isPermaLink="true">/content/docs/</guid>
         <description>No description provided.</description>
-        <pubDate>Mon, 03 Jun 2024 00:57:20 -0600</pubDate>
+        <pubDate>Mon, 03 Jun 2024 01:09:02 -0600</pubDate>
         <atom:link href="/content/docs/" rel="self" />
         <dc:creator></dc:creator>
     </item>

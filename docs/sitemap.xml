@@ -2,10 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>/content/docs/getting-started/</loc>
-    <lastmod>2024-06-03</lastmod>
-  </url>
-  <url>
     <loc>/</loc>
     <lastmod>2024-06-03</lastmod>
   </url>
@@ -15,6 +11,10 @@
   </url>
   <url>
     <loc>/content/docs/building-and-publishing/</loc>
+    <lastmod>2024-06-03</lastmod>
+  </url>
+  <url>
+    <loc>/content/docs/getting-started/</loc>
     <lastmod>2024-06-03</lastmod>
   </url>
   <url>
