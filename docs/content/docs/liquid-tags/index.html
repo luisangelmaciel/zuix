@@ -1,0 +1,1042 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="About liquid template language and shortcodes">
+    <meta name="keywords" content="zuix,web starter,liquid,tags,template,shortcodes,zx,rawFile,unpre,layout" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid tags and shortcodes</title>
+    <link rel="author" href="humans.txt" />
+    <link rel="alternate" type="application/rss+xml"
+          title="RSS Feed for Liquid tags and shortcodes"
+          href="/feed/rss.xml" />
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Progressive Web App -->
+    <meta name="theme-color" content="white">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Add to home screen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="/images/icons/desktop/android-chrome-192x192.png">
+    <link rel="icon" sizes="512x512" href="/images/icons/desktop/android-chrome-512x512.png">
+
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="A zUIx website">
+    <link rel="apple-touch-icon-precomposed" href="/images/icons/desktop/apple-touch-icon.png">
+    <link rel="mask-icon" href="/images/icons/desktop/safari-pinned-tab.svg" color="#5bbad5">
+
+    <!-- Tile color for Windows -->
+    <meta name="msapplication-TileImage" content="/images/icons/desktop/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/desktop/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/desktop/favicon-16x16.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="https://www.example.com/">
+    -->
+
+    
+    <link rel="preload" as="style" href="/css/prism-tomorrow.min.css" />
+    <link rel="stylesheet" href="/css/prism-tomorrow.min.css" />
+    
+
+    <link rel="preload" as="style" href="/css/fla/flex-layout-attribute.min.css" />
+    <link rel="stylesheet" href="/css/fla/flex-layout-attribute.min.css" />
+
+    <!-- zuix.js https://github.com/zuixjs/zuix -->
+    <link rel="preload" as="script" href="/js/zuix/zuix.min.js">
+    <link rel="preload" as="script" href="/config.js">
+    <script src="/js/zuix/zuix.min.js"></script>
+    <script src="/config.js"></script>
+
+<style>
+body {
+    font-family: "Times New Roman", Times, Georgia, "Bookman Old Style", serif;
+    font-size: 18px;
+    margin: 0;
+}
+
+img {
+    margin: auto;
+    display: block;
+    max-width: 100%;
+}
+
+nav {
+    height: 64px;
+    max-height: 64px;
+    padding: 8px;
+}
+nav h1 {
+    margin: 0;
+}
+
+main {
+    min-height: calc(100vh - 64px - 200px); /* viewport height - header height - footer height */
+    padding-bottom:56px;
+}
+main h1, main h2, main h3, main h4, main h5, main h6, main p {
+    font-weight: 400;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-top: 1.5em;
+}
+main h2 {
+    margin-top: 2.5em;
+}
+main h1 {
+    font-size: 250%;
+}
+main h4 {
+    font-weight: bold;
+}
+main p {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    line-height: 150%;
+}
+main img.image-cover {
+    margin-top: 2px;
+    /*margin-top: 24px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;*/
+    aspect-ratio: 10 / 4;
+    width: 100%;
+}
+
+ul {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    line-height: 120%;
+    padding-left: 32px;
+}
+li {
+    font-size: 95%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    min-height: 32px;
+}
+
+small {
+    font-size: 90%;
+    opacity: 0.8;
+}
+
+pre:not([class*=language-]) {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}
+code:not([class*=language-]) {
+    word-break: break-word;
+    line-height: 140%;
+}
+
+footer {
+    font-size: 90%;
+}
+footer section {
+    padding: 32px;
+}
+
+blockquote {
+    font-size: 1.4em;
+    margin:50px auto;
+    font-style:italic;
+    padding:1.2em 30px 1.2em 75px;
+    line-height:1.6;
+    position: relative;
+    opacity: 0.8;
+}
+blockquote::before {
+    font-family: Arial, serif;
+    content: "\201C";
+    font-size:4em;
+    position: absolute;
+    left: 12px;
+    top:-24px;
+}
+blockquote::after {
+    content: '';
+}
+blockquote span {
+    opacity: 0.6;
+    display:block;
+    font-style: normal;
+    font-weight: bold;
+    margin-top:12px;
+}
+
+.title {
+    font-size: 110%;
+    max-width: calc(100vw - 104px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.subtitle {
+    font-size: 95%;
+    max-width: calc(100vw - 172px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.author {
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 32px;
+    font-size: 85%
+}
+
+.card-title {
+    font-size: 110%;
+    padding: 8px;
+    text-align: left;
+    line-height: 140%;
+}
+
+.menu-item {
+    padding: 8px;
+}
+
+.icon-button {
+    display: flex;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+}
+.icon-button:hover {
+
+}
+.icon-button:before {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 4em;
+    transform: translate(20px, 20px);
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    box-shadow: 0 0 0 0  rgba(255,255,255,0.1);
+    transition: 0s;
+}
+.icon-button:active:before {
+    position: absolute;
+    border-radius: 4em;
+    transform: translate(22px, 22px);
+    opacity: 1;
+    box-shadow: 0 0 12px 24px rgba(255,255,255,0.1);
+    transition: all 150ms ease-in-out;
+}
+.icon-button:active svg {
+    transform: scale(97%);
+}
+
+/* forms */
+
+.button {
+    cursor: pointer;
+    display: flex;
+    padding: 6px;
+    height: 48px;
+    margin: 6px;
+    align-items: center;
+    border-radius: 6px;
+    background-color: #bbbbbb15;
+    box-shadow: 0 1px 4px 0 #00000055;
+}
+.button:hover {
+    background-color: #bbbbbb1a;
+    box-shadow: 0 3px 8px 0 #00000055;
+}
+.theme-dark .button:hover {
+    box-shadow: 0 0 6px 2px var(--dark-color-text);
+}
+.button:active {
+    background-color: #bbbbbb26;
+    box-shadow: 0 0 2px 0 #00000055;
+}
+.button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+    box-shadow: 0 0 0 0 #00000055;
+}
+
+.input-container {
+    font-size: 200%;
+    position: relative;
+    margin-bottom: 25px;
+}
+.input-container label {
+    position:absolute;
+    top: 8px;
+    left: 0;
+    transition: all 0.15s ease-in-out;
+}
+.input-container input, input:not([type="checkbox"]):not([type="radio"]):not(.mdl-textfield__input) {
+    font-size: 100%;
+    z-index: 1;
+    border:0;
+    width: 100%;
+    background: transparent;
+    border-bottom: 1px solid;
+    padding: 8px 0 5px 0;
+}
+.input-container input:focus, input:focus:not([type="checkbox"]):not([type="radio"]) {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #bd0505;
+}
+.input-container input:focus ~ label,
+.input-container input:valid ~ label {
+    top: -18px;
+    font-size: 70%;
+    font-weight: normal;
+}
+
+
+[type=radio],
+[type=checkbox] {
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
+    border: solid 1px;
+}
+[type=radio],
+[type=checkbox] {
+    width: 22px!important;
+    height: 18px;
+    margin-left: 6px;
+    margin-right: 6px;
+    position: relative;
+    border: solid 1px;
+    border-radius: 2px;
+}
+[type=radio]:checked::before,
+[type=checkbox]:checked::before {
+    content: "";
+    width: 12px;
+    height: 10px;
+    position: absolute;
+    top: 3px;
+    left: 4px;
+}
+[type=radio],
+[type=radio]:checked::before{
+    border-radius: 100%;
+}
+
+:root {
+    --lite-color: #fff;
+    --lite-color-text: #000;
+    --lite-nav-color: #3c4487;
+    --lite-nav-color-text: #fff;
+    --lite-color--accent: #e10c57;
+    --lite-color--primary: #236fbc;
+    --lite-color--code: #005000;
+    --lite-font--weigth: 400;
+
+    --dark-color: #1d1d1d;
+    --dark-color-text: #d2d2d2;
+    --dark-nav-color: #543369; /* #4b2d4b; */ /* #014b76; */ /* #60142d; */
+    --dark-nav-color-text: #ccc;
+    --dark-color--accent: #d5c262;
+    --dark-color--primary: #88c963;
+    --dark-color--code: #a0bf85;
+    --dark-font--weigth: 400;
+}
+
+/*========================*\
+      Theme 'lite'
+\*========================*/
+
+body{
+    background-color: var(--lite-color);
+    color: var(--lite-color-text);
+    font-weight: var(--lite-font--weigth);
+}
+nav, footer, header {
+    background-color: var(--lite-nav-color);
+    color: var(--lite-nav-color-text);
+    fill: var(--lite-nav-color-text);
+    box-shadow: 0 4px 6px 0 rgb(0 0 0 / 20%), 0 -4px 12px 0 rgb(0 0 0 / 20%);
+}
+nav svg, .menu-button svg {
+    fill:var(--lite-nav-color-text);
+}
+svg {
+    fill:var(--lite-color-text);
+}
+nav a, footer a {
+    color: var(--lite-nav-color-text);
+}
+a {
+    color: var(--lite-color--accent);
+    text-decoration: none;
+}
+main h1, main h2, main h3 {
+    color: var(--lite-color--primary);
+}
+code:not([class*=language-]), pre:not([class*=language-]) {
+    color: var(--lite-color--code);
+}
+.accent {
+    color: var(--lite-color--accent);
+    fill: var(--lite-color--accent);
+}
+.primary {
+    color: var(--lite-color--primary);
+    fill: var(--lite-color--primary);
+}
+.background {
+    background-color: var(--lite-color);
+}
+.input-container input,  input {
+  color: var(--lite-color-text);
+  border-bottom-color: var(--lite-color--primary);
+}
+.input-container input:valid,  input:valid {
+  border-bottom-color: var(--lite-color--primary)!important;
+}
+
+[type=radio]:checked::before,
+
+[type=checkbox]:checked::before {
+    background-color: var(--lite-color--accent);
+}
+
+[type=radio],
+
+[type=checkbox] {
+    border-color: var(--lite-color--primary);
+}
+
+button {
+    color: var(--lite-color-text);
+    fill: var(--lite-color-text);
+}
+
+/*========================*\
+      Theme 'dark'
+\*========================*/
+
+body.theme-dark {
+    background-color: var(--dark-color);
+    color: var(--dark-color-text);
+    font-weight: var(--dark-font--weigth);
+}
+.theme-dark nav, .theme-dark footer, .theme-dark header {
+    background-color: var(--dark-nav-color);
+    color: var(--dark-nav-color-text);
+    fill: var(--dark-nav-color-text);
+    box-shadow: 0 4px 6px 0 rgb(0 0 0 / 20%), 0 -4px 12px 0 rgb(0 0 0 / 20%);
+}
+.theme-dark nav svg, .theme-dark .menu-button svg {
+    fill:var(--dark-nav-color-text);
+}
+.theme-dark svg {
+    fill:var(--dark-color-text);
+}
+.theme-dark nav a, .theme-dark footer a {
+    color: var(--dark-nav-color-text);
+}
+.theme-dark a {
+    color: var(--dark-color--accent);
+    text-decoration: none;
+}
+.theme-dark main h1, .theme-dark main h2, .theme-dark main h3 {
+    color: var(--dark-color--primary);
+}
+.theme-dark code:not([class*=language-]), .theme-dark pre:not([class*=language-]) {
+    color: var(--dark-color--code);
+}
+.theme-dark .accent {
+    color: var(--dark-color--accent);
+    fill: var(--dark-color--accent);
+}
+.theme-dark .primary {
+    color: var(--dark-color--primary);
+    fill: var(--dark-color--primary);
+}
+.theme-dark .background {
+    background-color: var(--dark-color);
+}
+.theme-dark .input-container input, .theme-dark  input {
+  color: var(--dark-color-text);
+  border-bottom-color: var(--dark-color--primary);
+}
+.theme-dark .input-container input:valid, .theme-dark  input:valid {
+  border-bottom-color: var(--dark-color--primary)!important;
+}
+.theme-dark 
+[type=radio]:checked::before,
+.theme-dark 
+[type=checkbox]:checked::before {
+    background-color: var(--dark-color--accent);
+}
+.theme-dark 
+[type=radio],
+.theme-dark 
+[type=checkbox] {
+    border-color: var(--dark-color--primary);
+}
+.theme-dark 
+button {
+    color: var(--dark-color-text);
+    fill: var(--dark-color-text);
+}
+
+/*
+---------------------------------
+ */
+
+.theme-toggle[type=checkbox] {
+    margin: 0;
+    --size: 32px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    width: var(--size)!important;
+    height: var(--size)!important;
+    box-shadow: inset calc(var(--size) * 0.33) calc(var(--size) * -0.25) 0;
+    border-radius: var(--size);
+    transition: all 500ms;
+    color: var(--lite-nav-color-text);
+}
+.theme-toggle[type=checkbox]:checked {
+    --ray-size: calc(var(--size) * -0.4);
+    --offset-orthogonal: calc(var(--size) * 0.65);
+    --offset-diagonal: calc(var(--size) * 0.45);
+    transform: scale(0.75);
+    box-shadow: inset 0 0 0 var(--size),
+        calc(var(--offset-orthogonal) * -1) 0 0 var(--ray-size),
+        var(--offset-orthogonal) 0 0 var(--ray-size),
+        0 calc(var(--offset-orthogonal) * -1) 0 var(--ray-size),
+        0 var(--offset-orthogonal) 0 var(--ray-size),
+        calc(var(--offset-diagonal) * -1) calc(var(--offset-diagonal) * -1) 0 var(--ray-size),
+        var(--offset-diagonal) var(--offset-diagonal) 0 var(--ray-size),
+        calc(var(--offset-diagonal) * -1) var(--offset-diagonal) 0 var(--ray-size),
+        var(--offset-diagonal) calc(var(--offset-diagonal) * -1) 0 var(--ray-size);
+    color: var(--dark-nav-color-text);
+    background-color: transparent!important;
+}
+.theme-toggle[type=checkbox]:checked::before {
+    background-color: transparent!important;
+}
+
+/* ----- MENU OVERLAY COMPONENT ----- */
+[z-load*="/components/menu-overlay"] .circle-button {
+    border: solid 1px var(--lite-color);
+    background-color: var(--lite-nav-color)!important;
+    fill: var(--lite-nav-color-text)!important;
+}
+[z-load*="/components/menu-overlay"] .circle-button .material-icons {
+    color: var(--lite-nav-color-text);
+}
+.theme-dark [z-load*="/components/menu-overlay"] .circle-button .material-icons {
+    color: var(--dark-nav-color-text);
+}
+.theme-dark [z-load*="/components/menu-overlay"] .circle-button {
+    border: solid 1px var(--dark-color);
+    background-color: var(--dark-nav-color)!important;
+    fill: var(--dark-nav-color-text)!important;
+}
+.theme-dark [z-load*="/components/menu-overlay"] div[z-field="menu_overlay"] {
+    background: radial-gradient(circle at bottom, black, #000000dd, #00000077, transparent)!important;
+}
+
+</style>
+
+</head>
+
+
+    
+
+
+
+
+
+
+<body layout="column stretch-center"
+      ctrl z-load="@lib/controllers/header-auto-hide"
+      :header="'header-bar'" z-lazy="scroll">
+
+<nav layout="row top-center" #header-bar>
+    <div self="size-large stretch" layout="row center-center" style="gap: 8px;">
+        <!-- BACK TO POST LIST -->
+        <a class="icon-button" aria-label="Back to post list" href=".." style="width: 48px">
+            
+    <svg height="48px" viewBox="0 0 24 24" width="48px">
+        <path d="M0 0h24v24H0V0z" fill="none"/>
+        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+    </svg>
+
+        </a>
+        
+        <div self="size-x1">
+            <h1 class="title">Web Starter</h1>
+            <div class="subtitle">Liquid tags and shortcodes</div>
+        </div>
+        <a class="icon-button" aria-label="Search" href="/search">
+            
+    <svg width="46px" height="46px" viewBox="0 0 24 24" style="margin: 2px">
+        <path d="M0 0h24v24H0V0z" fill="none"/>
+        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    </svg>
+
+        </a>
+        <div style="padding-top: 4px; padding-right: 4px">
+            <input class="theme-toggle" type="checkbox" aria-label="Toggle theme" checked>
+        </div>
+    </div>
+</nav>
+
+<main self="size-large">
+
+    <div self="size-large" style="position: relative;width: 100%;;display: block">
+            <img class="image-cover" src="./images/cover-preview.webp" alt="Cover image preview" style="position: absolute; display: block">
+            <img class="image-cover" src="./images/cover.webp" alt="Cover image" style="position: relative; display: block; z-index: 1">
+        </div>
+
+    
+        <h1>Liquid tags and shortcodes</h1>
+    
+
+    
+        <div class="author">
+            by <em>Gene</em> &mdash;
+            posted on 4 April 2022
+        </div>
+    
+
+    <p><a href="https://11ty.dev/docs/shortcodes/">Shortcodes</a> can be used to process rendered content or as a handy way to output reusable
+fragments of content, and even web components, without having to deal with HTML or JavaScript.</p>
+<h2>Web starter shortcodes</h2>
+<h3>layout</h3>
+<p>This tag outputs a <code>div</code> with the given <a href="https://progressivered.com/fla/">Flex Layout Attributes</a>.
+It's mainly intended wrap and format <code>zx</code> shortcode output.</p>
+<pre class="language-liquid"><code class="language-liquid"><span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> layout <span class="token string">'&lt;flex_layout_attributes>'</span> <span class="token punctuation">[</span><span class="token string">'&lt;element_attr_1>'</span> <span class="token range operator">..</span><span class="token punctuation">.</span> <span class="token string">'&lt;element_attr_n>'</span><span class="token punctuation">]</span> <span class="token delimiter punctuation">%}</span></span>
+    (content)
+<span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> endlayout <span class="token delimiter punctuation">%}</span></span></code></pre>
+<p><strong>Example:</strong></p>
+<pre class="language-liquid"><code class="language-liquid"><span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> layout <span class="token string">'row center-center'</span> <span class="token string">'style="gap: 12px"'</span> <span class="token delimiter punctuation">%}</span></span>
+    <span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> zx <span class="token string">'button'</span> <span class="token string">'#test-link-1'</span> <span class="token delimiter punctuation">%}</span></span> Button 1 <span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> endzx <span class="token delimiter punctuation">%}</span></span>
+    <span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> zx <span class="token string">'button'</span> <span class="token string">'#test-link-2'</span> <span class="token delimiter punctuation">%}</span></span> Button 2 <span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> endzx <span class="token delimiter punctuation">%}</span></span>
+<span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> endlayout <span class="token delimiter punctuation">%}</span></span></code></pre>
+<h2></h2>
+<div layout="row center-center" style="gap: 12px"><a class="button" href="#test-link-1">Button 1</a>
+<a class="button" href="#test-link-2">Button 2</a></div>
+<h3>zx</h3>
+<p>The <code>zx</code> shortcode is used to render HTML fragments or components based on user-defined tag templates.
+Tag templates are loaded from the <code>./templates/tags</code> folder, and they consist of simple and small JavaScript
+code that usually renders reusable bits.</p>
+<pre class="language-liquid"><code class="language-liquid"><span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> zx <span class="token string">'&lt;tag_name>'</span> <span class="token punctuation">[</span><span class="token string">'&lt;tag_option_1>'</span> <span class="token range operator">..</span><span class="token punctuation">.</span> <span class="token operator">&lt;</span>tag_option_n<span class="token operator">></span><span class="token punctuation">]</span> <span class="token delimiter punctuation">%}</span></span>
+(optional content / configuration)
+<span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> endzx <span class="token delimiter punctuation">%}</span></span></code></pre>
+<p>In the previous example the tag <code>button</code> is loaded from <a href="https://github.com/zuixjs/zuix-web-starter/blob/master/templates/tags/button.js"><code>./templates/tags/button.js</code></a>. The first option for this button tag
+is the anchor name or URL to be opened when the button is clicked (<code>#test-link-1</code> in this case).</p>
+<p>For more <code>zx</code> tags examples see also:</p>
+<ul>
+<li><a href="https://zuixjs.github.io/web-app/content/docs/zkit-components-tags/">zKit components tags</a></li>
+<li><a href="https://zuixjs.github.io/web-app/content/docs/material-design-tags/">Material Design tags</a></li>
+</ul>
+<h4>Adding custom zx tags</h4>
+<p>A custom tag can be implemented by adding a <code>&lt;custom_tag_name&gt;.js</code> file to the <code>./templates/tags/</code> folder.<br>
+For instance, the following code is the <strong>./templates/tags/button.js</strong> used in the previous example:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> template <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;a class="button" href="{{ linkUrl | safe }}">
+  {{ content }}
+&lt;/a></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">render<span class="token punctuation">,</span> content<span class="token punctuation">,</span> linkUrl</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">render</span><span class="token punctuation">(</span>template<span class="token punctuation">,</span> <span class="token punctuation">{</span>content<span class="token punctuation">,</span> linkUrl<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<h3>rawFile</h3>
+<p>This tag can be used to include normalized <code>HTML</code> fragments inside <code>.md</code> files without further processing from Markdown engine.</p>
+<pre class="language-liquid"><code class="language-liquid"><span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> rawFile <span class="token string">"&lt;file_path>"</span> <span class="token delimiter punctuation">%}</span></span></code></pre>
+<h3>unpre</h3>
+<p>Sometimes can happen to use <code>HTML</code> code in a Markdown <code>.md</code> file, and this tag can be used to wrap the <code>HTML</code> code inside a preformatted block,
+so that it will be actually recognized as HTML and the editor will highlight the code correctly. It's just an aesthetic hack to make your eyes happier
+if the editor is not highlighting the HTML markup.</p>
+<p><strong>Example:</strong></p>
+<pre class="language-liquid"><code class="language-liquid"><span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> unpre <span class="token delimiter punctuation">%}</span></span>
+'''html
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">color</span><span class="token punctuation">:</span> purple</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>Hello World!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+'''
+<span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> endunpre <span class="token delimiter punctuation">%}</span></span></code></pre>
+<h3>wrapDom / wrapCss</h3>
+<p>These two tags will add to a CSS and HTML fragments, the required code so that the CSS will be only applied
+to those HTML fragments defined inside <code>wrapDom</code> having the same <code>&lt;fragment_id&gt;</code> (scoped CSS).<br>
+This can also be used with the <code>include</code> shortcode, to load the CSS and HTML fragments from external files.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="language-liquid"><code class="language-liquid"><span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> wrapDom <span class="token string">'&lt;fragment_id>'</span> <span class="token delimiter punctuation">%}</span></span>
+  <span class="token comment">&lt;!-- HTML fragment --></span>
+<span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> endwrapDom <span class="token delimiter punctuation">%}</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+<span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> wrapCss <span class="token string">'&lt;fragment_id>'</span> <span class="token punctuation">[</span><span class="token operator">&lt;</span>encapsulate<span class="token operator">></span><span class="token punctuation">]</span> <span class="token delimiter punctuation">%}</span></span>
+  <span class="token comment">/* CSS fragment */</span>
+<span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> endwrapCss <span class="token delimiter punctuation">%}</span></span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+<p><strong>Example:</strong></p>
+<pre class="language-liquid"><code class="language-liquid"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>Global scope H3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+
+<span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> wrapDom <span class="token string">'test-fragment'</span> <span class="token delimiter punctuation">%}</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>Fragment scope H3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> endwrapDom <span class="token delimiter punctuation">%}</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+<span class="token selector"><span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> wrapCss <span class="token string">'test-fragment'</span> <span class="token delimiter punctuation">%}</span></span>
+:host</span> <span class="token punctuation">{</span>
+    <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">h3</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> deeppink<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> endwrapCss <span class="token delimiter punctuation">%}</span></span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+<h3>Global scope H3</h3>
+<div z-component="fragment" test-fragment="">
+    <h3 test-fragment="">Fragment scope H3</h3>
+</div>
+<style>
+
+[z-component][test-fragment] {
+ text-align: center; }
+
+[z-component][test-fragment]
+h3 {
+ color: deeppink }
+
+ </style>
+
+
+</main>
+
+
+
+    
+    
+
+    <div self="size-large" layout="rows center-spread" class="page-navigation">
+
+        
+            <a href="/content/docs/page-editing-and-options/" style="text-align: center;">
+                <div layout="row center-center" class="navigation-direction">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0V0z" fill="none"/>
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                    </svg>
+                    <span style="padding-right: 24px">Previous</span>
+                </div>
+                <div class="navigation-title">Page editing and options</div>
+            </a>
+        
+
+        
+            <a href="/content/docs/building-and-publishing/" style="text-align: center;">
+                <div layout="row center-center" class="navigation-direction">
+                    <span style="padding-left: 24px">Next</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0V0z" fill="none"/>
+                        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/>
+                    </svg>
+                </div>
+                <div class="navigation-title">Building for production</div>
+            </a>
+        
+
+    </div>
+    <style>
+        .page-navigation {
+            margin-top: 40px;
+            gap:12px;
+            margin-bottom: 80px;
+            padding-left: 8px;
+            padding-right: 8px;
+            font-size: 140%
+        }
+        .navigation-direction {
+            gap: 8px;
+            color: var(--lite-color--primary);
+            fill: var(--lite-color--primary);
+        }
+        .theme-dark .navigation-direction {
+            color: var(--dark-color--primary);
+            fill: var(--dark-color--primary);
+        }
+        .navigation-title {
+            color: var(--lite-color-text);
+            margin: 8px;
+            font-size: 70%;
+            max-width: 80vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .theme-dark .navigation-title {
+            color: var(--dark-color-text);
+        }
+    </style>
+
+
+
+
+
+<footer #footer layout="column bottom-center" style="min-height: 200px;">
+
+    <div self="size-large" layout="rows top-justify">
+        <section>
+            <div><strong>Web Starter</strong></div>
+            <ul>
+                
+                
+                    <li>
+                        <a href="/content/docs/">Documentation</a>
+                    </li>
+                
+            </ul>
+        </section>
+        
+        
+        
+        <section>
+            <div><strong>Latest posts</strong></div>
+            <ul>
+                
+                    <li><a href="/content/docs/getting-started/">Getting started</a></li>
+                
+                    <li><a href="/content/docs/page-editing-and-options/">Page editing and options</a></li>
+                
+                    <li><a href="/content/docs/liquid-tags/">Liquid tags and shortcodes</a></li>
+                
+                    <li><a href="/content/docs/building-and-publishing/">Building for production</a></li>
+                
+            </ul>
+        </section>
+        
+        
+        <section>
+            
+            <div><strong>Links</strong></div>
+            <ul>
+                
+                    <li><a href="https://zuixjs.org">zuix.js docs</a></li>
+                
+                    <li><a href="https://zuixjs.github.io/zkit">zKit components</a></li>
+                
+                    <li><a href="https://11ty.dev/docs">11ty site generator docs</a></li>
+                
+            </ul>
+            
+        </section>
+        
+    </div>
+
+    <div self="size-large" layout="row center-spread" style="padding: 12px;">
+
+        <div self="left">
+            <a href="/feed/rss.xml" layout="row bottom-left" style="gap: 6px">
+                <img src="/images/rss-feed.png" width="24" height="24" alt="RSS feed logo">
+                <span>RSS feed</span>
+            </a>
+        </div>
+        <div self="right">
+            powered by <a href="https://zuixjs.github.io/zkit"><strong>zKit</strong></a> and <a href="https://zuixjs.org"><strong>zuix⚡js</strong></a>
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<div z-load="@lib/components/menu-overlay"
+     z-context="menu-overlay"
+     :position="'center'" :before="'footer'">
+
+    <div #items>
+        <code>-~=(Web Starter)=~-</code>
+
+    <a href="/content/docs/">Documentation</a> |
+
+    </div>
+
+</div>
+
+
+<div z-load="cms/zuix-editor" z-context="zuix-editor" z-lazy="false" class="visible-on-ready" style="z-index: 10000">
+        <div #sections>
+            
+                <div>
+                    <div #name>docs</div>
+                </div>
+            
+        </div>
+    </div>
+    <script>
+      let contentSections = [];
+      
+      contentSections['docs'] = {
+        section: 'docs',
+        title: 'Documentation',
+        page: {
+          url: '/content/docs/',
+          filePathStem: '/content/docs/index',
+          inputPath: './source/content/docs/index.liquid',
+          outputPath: 'docs/content/docs/index.html'
+        }
+      };
+      
+      self.zuixEditor = null;
+      zuix.context('zuix-editor', function(ctx) {
+        zuixEditor = ctx
+        zuixEditor.data = {"links":[{"title":"zuix.js docs","link":"https://zuixjs.org"},{"title":"zKit components","link":"https://zuixjs.github.io/zkit"},{"title":"11ty site generator docs","link":"https://11ty.dev/docs"}],"app":{"title":"Web Starter","subtitle":"Simple, yet powerful!","language":"en","baseUrl":"/","resourcePath":"/app/","libraryPath":{"@lib":"https://zuixjs.github.io/zkit/lib/1.2/","@hgui":"https://genielabs.github.io/homegenie-web-ui/app/","@cdnjs":"https://cdnjs.cloudflare.com/ajax/libs/"},"environment":"default"},"eleventy":{"version":"2.0.1","generator":"Eleventy v2.0.1","env":{"source":"cli","runMode":"serve","config":"/home/projects/github-vfcynf/.eleventy.js","root":"/home/projects/github-vfcynf","isServerless":false}},"layout":"basic.liquid","tags":["home","docs"],"group":"docs","title":"Liquid tags and shortcodes","description":"About liquid template language and shortcodes","options":"highlight ext-links","order":20,"coverPreview":"./images/cover-preview.webp","coverImage":"./images/cover.webp","coverUrl":"https://artsandculture.google.com/asset/the-starry-night-vincent-van-gogh/bgEuwDxel93-Pg","author":"Gene","pubDate":"2022-04-05T00:00:00.000Z","keywords":["zuix","web starter","liquid","tags","template","shortcodes","zx","rawFile","unpre","layout"],"page":{"date":"2024-06-03T06:54:18.079Z","inputPath":"./source/content/docs/liquid-tags/index.md","fileSlug":"liquid-tags","filePathStem":"/content/docs/liquid-tags/index","outputFileExtension":"html","templateSyntax":"liquid,md","url":"/content/docs/liquid-tags/","outputPath":"docs/content/docs/liquid-tags/index.html"}};
+      });
+      function setEditorData(pageData, hideEdit) {
+        zuix.context('zuix-editor', function(ed) {
+          if (!pageData) {
+            ed.mode({
+              editPage: false,
+              deletePage: false,
+              addPage: true,
+              addComponent: true,
+              rebuildAll: true
+            });
+          } else if (pageData.section) {
+            // section / group
+            ed.mode({
+              editPage: true,
+              deletePage: pageData.group != null && pageData.group.length > 0,
+              addPage: true,
+              addComponent: true,
+              rebuildAll: true,
+              data: pageData
+            });
+          } else {
+            // single page
+            pageData.section = pageData.group;
+            ed.mode({
+              editPage: !hideEdit,
+              deletePage: pageData.group != null && pageData.group.length > 0,
+              addPage: true,
+              addComponent: true,
+              rebuildAll: false,
+              data: pageData
+            });
+          }
+        });
+      }
+    </script>
+
+
+
+<script>
+//window.__zuix__debug = true;
+zuix.lazyLoad(true);
+themeSetup();
+function themeSetup() {
+  const doc = zuix.$(document.body);
+  const toggle = doc.find('.theme-toggle');
+  const themeDark = 'theme-dark';
+  const storeKey = 'app.theme';
+  const fadeColors = {
+    transition: 'color 300ms ease-in, background-color 300ms ease-in'
+  };
+  setTimeout(function() {
+    doc.css(fadeColors);
+    doc.find('header').css(fadeColors);
+    doc.find('nav').css(fadeColors);
+    doc.find('footer').css(fadeColors);
+  }, 100);
+  toggle.on('change', toggleTheme);
+  toggleTheme();
+  function toggleTheme(ev) {
+    const checked = ev ?
+      toggle.checked() :
+      localStorage.getItem(storeKey) === 'true';
+    !ev && toggle.checked(checked);
+    checked ? doc.addClass(themeDark) : doc.removeClass(themeDark);
+    document.documentElement.style
+        .setProperty('color-scheme', checked ? 'dark' : 'light');
+    localStorage.setItem(storeKey, String(checked));
+  }
+}
+
+
+function processExternalLinks(view) {
+    // Force opening of all non-local links in a new window
+    zuix.$(view).find('a[href*="://"]')
+        .attr('target', '_blank')
+        .attr('rel', 'noreferrer');
+}
+zuix.hook('view:process', function(view) {
+    processExternalLinks(view);
+});
+processExternalLinks(document);
+
+
+
+// zuix-editor events handling
+zuix.context('zuix-editor', function(ed) {
+  const data = ed.data;
+  if (data.tags && data.tags.indexOf('sections') !== -1) {
+    data.section = data.group;
+  }
+  setEditorData(ed.data);
+  ed.on({
+    'zuix:action:progress': function(e, ar) {
+      if (ar.action === 'delete-page' && ar.data.tags.indexOf('sections') === -1) {
+        document.location.href = ar.redirect + '#waitReload';
+      }
+    },
+    'zuix:action:result': function(e, ar) {
+      if (ar) {
+        switch(ar.action) {
+          case 'add-page':
+            document.location.href = ar.url;
+            break;
+          case 'delete-page':
+            if (ar.data.tags.indexOf('sections') !== -1) { // whole section
+              document.location.href = data.app.baseUrl;
+            } else { // single page
+              refresh();
+            }
+            break;
+          case 'add-component':
+            refresh();
+            break;
+        }
+      } else {
+        ed.browserSync.socket.connect();
+      }
+    }
+  });
+});
+function refresh(scrollTop) {
+  document.location.reload();
+}
+
+</script>
+</body>
+
+</html>
+
